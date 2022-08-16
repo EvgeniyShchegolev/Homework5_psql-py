@@ -44,7 +44,7 @@ def add_client(firstname=str, lastname=str, mail=str):
 
 
 def add_phone(number=str, client_id=int):
-    """Добаляет нового номера телефона для клиента в БД"""
+    """Добаляет новый номер телефона клиента в БД"""
     try:
         cur.execute("""
         INSERT INTO phone(number, client_id) VALUES(%s, %s);
@@ -56,7 +56,7 @@ def add_phone(number=str, client_id=int):
 
 
 def update_client(firstname=str, lastname=str, mail=str, client_id=int):
-    """Обновляет данные клиента в БД"""
+    """Изменяет данные клиента в БД"""
     cur.execute("""
     UPDATE client SET firstname=%s, lastname=%s, mail=%s WHERE id=%s;
     """, (firstname, lastname, mail, client_id))
@@ -65,7 +65,7 @@ def update_client(firstname=str, lastname=str, mail=str, client_id=int):
 
 
 def update_phone(number=str, phone_id=int):
-    """Обновляет номер телефона клиента в БД"""
+    """Изменяет номер телефона клиента в БД"""
     cur.execute("""
     UPDATE phone SET number=%s WHERE id=%s;
     """, (number, phone_id))
@@ -74,7 +74,7 @@ def update_phone(number=str, phone_id=int):
 
 
 def delete_phone(phone_id=int):
-    """Удаляет номер телефона из БД"""
+    """Удаляет номер телефона клиента из БД"""
     cur.execute("""
     DELETE FROM phone WHERE id=%s;
     """, (phone_id,))
@@ -83,7 +83,7 @@ def delete_phone(phone_id=int):
 
 
 def delete_client(client_id=int):
-    """Удаляет данные о клиенте из БД"""
+    """Удаляет данные клиенте из БД"""
     if _search_has_phone(client_id):
         print(f'У клиента с id={client_id} есть привязанные номера телефона')
         return
@@ -95,7 +95,7 @@ def delete_client(client_id=int):
 
 
 def search_firstname(firstname=str):
-    """Ищет данные о клиенте в БД по имени клиента"""
+    """Ищет данные клиента в БД по имени клиента"""
     cur.execute("""
     SELECT client.id, firstname, lastname, mail, number FROM client
     LEFT JOIN phone ON client.id = phone.client_id
@@ -105,7 +105,7 @@ def search_firstname(firstname=str):
 
 
 def search_lastname(lastname=str):
-    """Ищет данные о клиенте в БД по фамилии клиента"""
+    """Ищет данные клиента в БД по фамилии клиента"""
     cur.execute("""
     SELECT client.id, firstname, lastname, mail, number FROM client
     LEFT JOIN phone ON client.id = phone.client_id
@@ -115,7 +115,7 @@ def search_lastname(lastname=str):
 
 
 def search_mail(mail=str):
-    """Ищет данные о клиенте в БД по почте клиента"""
+    """Ищет данные клиента в БД по почте клиента"""
     cur.execute("""
     SELECT client.id, firstname, lastname, mail, number FROM client
     LEFT JOIN phone ON client.id = phone.client_id
@@ -125,7 +125,7 @@ def search_mail(mail=str):
 
 
 def search_phone(number=str):
-    """Ищет данные о клиенте в БД по номеру телефона клиента"""
+    """Ищет данные клиента в БД по номеру телефона клиента"""
     cur.execute("""
     SELECT client.id, firstname, lastname, mail, number FROM client
     LEFT JOIN phone ON client.id = phone.client_id
