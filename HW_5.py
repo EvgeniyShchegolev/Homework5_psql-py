@@ -154,7 +154,7 @@ def _print_search(data=list):
 if __name__ == "__main__":
     with psycopg2.connect(database="hw_sql_5", user="postgres", password="gfhjkm") as conn:
         with conn.cursor() as cur:
-            delete_tables()
+            # delete_tables()
             create_tables()
             add_client('Ivan', 'Ivanov', 'iivanov1987@mail.ru')
             add_phone('5553307', 1)
